@@ -8,22 +8,16 @@
       />
     </a>
   </div>
-  <ul class="navbar-links">
-    <li>
-      <a routerLink="/" routerLinkActive="active" class="nav-button">
-        Accueil
-      </a>
-    </li>
-    <li>
-      <a routerLink="/about" routerLinkActive="active" class="nav-button">
-        About Us
-      </a>
-    </li>
-    <li>
-      <a routerLink="/contact" class="nav-button"> Contact </a>
-    </li>
-  </ul>
-  <div class="navbar-actions">
-    <a routerLink="/login" class="btn-login">Se Connecter</a>
-  </div>
-</nav>
+  <ul class="nav-links">
+    <li><a routerLink="/">Accueil</a></li>
+    <li><a routerLink="/about">À propos</a></li>
+    <li><a routerLink="/services">Services</a></li>
+    <li><a routerLink="/contact">Contact</a></li>
+
+    <!-- ✅ Afficher Se Connecter et S'inscrire si l'utilisateur N'EST PAS connecté -->
+    <li *ngIf="!isLoggedIn"><a routerLink="/login">Se Connecter</a></li>
+    <li *ngIf="!isLoggedIn"><a routerLink="/register">S'inscrire</a></li>
+
+    <!-- ✅ Afficher Se Déconnecter si l'utilisateur EST connecté -->
+    <li *ngIf="isLoggedIn"><a (click)="logout()">Se Déconnecter</a></li>
+  </ul></nav>

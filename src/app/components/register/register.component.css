@@ -1,4 +1,5 @@
-.login-wrapper {
+/* Fond bleu de toute la page */
+.register-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,20 +7,27 @@
     background-color: white;
   }
   
-  .login-container {
+  /* Conteneur du formulaire */
+  .register-container {
     width: 400px;
     background: white;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
+  
+    margin: auto;
+    margin-top: 42px;
   }
   
+  /* Logo */
   .logo {
-    width: 100px;
-    height: auto;
+    width: 100px;  /* Ajuste la largeur */
+    height: auto;  /* Garde les proportions */
   }
   
+  
+  /* Styles pour les labels et inputs */
   label {
     display: block;
     font-weight: bold;
@@ -27,7 +35,7 @@
     text-align: left;
   }
   
-  input {
+  input, select {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
@@ -35,6 +43,7 @@
     border-radius: 5px;
   }
   
+  /* Bouton stylisé */
   button {
     width: 100%;
     background-color: #267580;
@@ -52,8 +61,10 @@
     background-color: #1b5b6d;
   }
   
-  .error {
-    color: red;
-    margin-top: 10px;
+  /* Responsive */
+  @media (max-width: 400px) {
+    .register-container {
+      width: 90%;
+    }
   }
   
