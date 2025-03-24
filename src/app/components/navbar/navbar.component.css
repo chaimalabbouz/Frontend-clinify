@@ -4,14 +4,27 @@
   align-items: center;
   padding: 1rem 2rem;
   background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombre plus visible */
+  position: relative; /* Nécessaire pour z-index */
+  z-index: 1000; /* Valeur élevée pour être au-dessus des autres éléments */
 }
 
-.navbar-brand .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #007bff;
-  text-decoration: none;
+/* Styles pour la navbar */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+/* Styles pour le lien du logo */
+.logo {
+  text-decoration: none; /* Supprimer le soulignement du lien */
+}
+
+/* Styles pour l'image du logo */
+.logo-image {
+  height: 50px; /* Ajustez la hauteur selon vos besoins */
+  width: auto; /* Conserver le ratio de l'image */
+  border-radius: 5px; /* Optionnel : coins arrondis */
 }
 
 .navbar-links {
@@ -23,7 +36,7 @@
 .navbar-links .nav-button {
   background: none;
   border: none;
-  color: #007bff;
+  color: #267580;
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
@@ -33,12 +46,12 @@
 }
 
 .navbar-links .nav-button:hover {
-  background-color: #007bff;
+  background-color: #267580;
   color: #fff;
 }
 
 .navbar-links .nav-button.active {
-  background-color: #007bff;
+  background-color: #267580;
   color: #fff;
 }
 
@@ -47,10 +60,10 @@
   border-radius: 5px;
   text-decoration: none;
   font-weight: 500;
-  background-color: #007bff;
+  background-color: #267580;
   color: #fff;
 }
 
 .navbar-actions .btn-login:hover {
-  background-color: #0056b3;
+  background-color: #1E1E2D;
 }

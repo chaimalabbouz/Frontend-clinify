@@ -1,0 +1,71 @@
+<div class="dossier-container">
+  <!-- État de chargement -->
+  <mat-card *ngIf="loading" class="loading-card">
+    <mat-card-content>
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Chargement du dossier médical en cours...</p>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Message d'erreur -->
+  <mat-card *ngIf="error" class="error-card">
+    <mat-card-content>
+      <p class="error-message">{{ error }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Affichage du dossier -->
+  <div *ngIf="dossier && !loading">
+    <!-- Section Dossier Médical -->
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-card-title>Dossier Médical</mat-card-title>
+        <mat-card-subtitle> Statut: {{ dossier.statut }} </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-content>
+        <div class="info-row">
+          <span class="label">Patient:</span>
+          <span
+            >{{ dossier.Patient?.firstName }}
+            {{ dossier.Patient?.lastName }}</span
+          >
+        </div>
+        <div class="info-row">
+          <span class="label">Médecin traitant:</span>
+          <span
+            >{{ dossier.Medecin?.firstName }}
+            {{ dossier.Medecin?.lastName }}</span
+          >
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Section Analyses -->
+    <mat-card
+      class="section-card"
+      *ngIf="dossier.analyses && dossier.analyses.length > 0"
+    >
+      <mat-card-header>
+        <mat-card-title>Analyses Médicales</mat-card-title>
+      </mat-card-header>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let analyse of dossier.analyses">
+            <mat-icon matListItemIcon>medical_services</mat-icon>
+            <div matListItemTitle>{{ analyse.nom }}</div>
+            <div matListItemLine>
+              Date: {{ analyse.date | date : "dd/MM/yyyy" }}
+            </div>
+            <div matListItemLine>Résultats: {{ analyse.resultat }}</div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

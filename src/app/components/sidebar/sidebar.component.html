@@ -1,0 +1,43 @@
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <h2 class="clinify-title">Clinify services médicaux</h2>
+  </div>
+
+  <div class="profile-section">
+    <img
+      src="assets/images/profile.png"
+      alt="Photo de profil"
+      class="profile-img"
+    />
+    <p class="welcome-msg">Bienvenue, [Prénom]</p>
+  </div>
+
+  <div class="nav-links">
+    <a
+      routerLink="/espace-patient/dossier"
+      routerLinkActive="active"
+      class="nav-link"
+    >
+      <mat-icon>medical_services</mat-icon>
+      <span>Dossier Médical</span>
+    </a>
+
+    <a
+      routerLink="/espace-patient/rendez-vous"
+      routerLinkActive="active"
+      class="nav-link"
+    >
+      <mat-icon>calendar_today</mat-icon>
+      <span>Mes Rendez-vous</span>
+    </a>
+
+    <a
+      routerLink="/espace-patient/nouveau-rdv"
+      routerLinkActive="active"
+      class="nav-link"
+    >
+      <mat-icon>add_circle</mat-icon>
+      <span>Prendre RDV</span>
+    </a>
+  </div>
+</nav>

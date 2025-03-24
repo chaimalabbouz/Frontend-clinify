@@ -1,0 +1,36 @@
+.dossier-container {
+    padding: 20px;
+  }
+  
+  .section-card {
+    margin-bottom: 20px;
+  }
+  
+  .loading-card, .error-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .error-message {
+    color: #f44336;
+  }
+  
+  .info-row {
+    display: flex;
+    margin: 10px 0;
+  }
+  
+  .label {
+    font-weight: 500;
+    width: 150px;
+  }
+  
+  mat-list-item {
+    height: auto !important;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
