@@ -1,1 +1,140 @@
-<p>rendez-vous works!</p>
+<div class="rdv-container">
+  <!-- Vue Formulaire Prendre RDV -->
+  <div *ngIf="showForm" class="form-view">
+    <div class="form-header">
+      <h2>
+        <i class="material-icons">event_available</i>
+        Prendre un rendez-vous
+      </h2>
+      <button (click)="toggleView()" class="btn-switch">
+        <i class="material-icons">list</i>
+        Voir mes RDV
+      </button>
+    </div>
+
+    <div *ngIf="successMessage" class="alert success">
+      <i class="material-icons">check_circle</i>
+      {{ successMessage }}
+    </div>
+
+    <form [formGroup]="rdvForm" (ngSubmit)="onSubmit()" class="rdv-form">
+      <div class="form-grid">
+        <!-- Date -->
+        <div class="form-group">
+          <label>Date <span>*</span></label>
+          <input
+            type="date"
+            formControlName="date"
+            [min]="today | date : 'yyyy-MM-dd'"
+            class="form-input"
+          />
+        </div>
+
+        <!-- Heure -->
+        <div class="form-group">
+          <label>Heure <span>*</span></label>
+          <input
+            type="time"
+            formControlName="heure"
+            min="08:00"
+            max="18:00"
+            class="form-input"
+          />
+        </div>
+
+        <!-- Type -->
+        <div class="form-group">
+          <label>Type <span>*</span></label>
+          <select formControlName="typeRendezVous" class="form-select">
+            <option value="Consultation">Consultation</option>
+            <option value="Urgence">Urgence</option>
+            <option value="Suivi">Suivi médical</option>
+          </select>
+        </div>
+
+        <!-- Médecin -->
+        <div class="form-group">
+          <label>Médecin <span>*</span></label>
+          <select formControlName="IdMedecin" class="form-select">
+            <option value="">-- Choisir --</option>
+            <option value="1">Dr. Jean Martin (Cardiologie)</option>
+            <option value="2">Dr. Ahmed Zied (Dentiste)</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="!rdvForm.valid" class="btn-submit">
+        <i class="material-icons">save</i>
+        Confirmer
+      </button>
+    </form>
+  </div>
+
+  <!-- Vue Liste des RDV -->
+  <div *ngIf="!showForm" class="list-view">
+    <div class="list-header">
+      <h2>
+        <i class="material-icons">calendar_today</i>
+        Mes Rendez-vous
+      </h2>
+      <button (click)="toggleView()" class="btn-switch">
+        <i class="material-icons">add</i>
+        Nouveau RDV
+      </button>
+    </div>
+
+    <div *ngIf="isLoading" class="loading">
+      <div class="spinner"></div>
+      <p>Chargement en cours...</p>
+    </div>
+
+    <div *ngIf="!isLoading && errorMessage" class="alert error">
+      <i class="material-icons">error</i>
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="!isLoading && rendezVousList.length === 0" class="empty">
+      <i class="material-icons">info</i>
+      <p>Aucun rendez-vous programmé</p>
+    </div>
+
+    <div *ngIf="!isLoading && rendezVousList.length > 0" class="rdv-list">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Heure</th>
+              <th>Médecin</th>
+              <th>Spécialité</th>
+              <th>Statut</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rdv of rendezVousList">
+              <td class="date">{{ rdv.date | date : "dd/MM/yyyy" }}</td>
+              <td>{{ rdv.heure | slice : 0 : 5 }}</td>
+              <td class="doctor">
+                <i class="material-icons">person</i>
+                {{ rdv.medecin?.nomComplet || "Non spécifié" }}
+              </td>
+              <td>{{ rdv.medecin?.specialite || "Généraliste" }}</td>
+              <td>
+                <span
+                  class="status"
+                  [class.pending]="rdv.statut === 'en attente'"
+                  [class.confirmed]="rdv.statut === 'validé'"
+                  [class.cancelled]="rdv.statut === 'annulé'"
+                >
+                  {{ rdv.statut || "Inconnu" }}
+                </span>
+              </td>
+              <td>{{ rdv.typeRendezVous || "Consultation" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

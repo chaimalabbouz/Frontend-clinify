@@ -1,25 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-interface DossierMedical {
-  id: number;
-  statut: string;
-  Patient: {
-    firstName: string;
-    lastName: string;
-  };
-  Medecin: {
-    firstName: string;
-    lastName: string;
-  };
-  analyses: {
-    id: number;
-    nom: string;
-    date: string;
-    resultat: string;
-  }[];
-}
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,9 +8,11 @@ interface DossierMedical {
 export class DossierMedicalService {
   private apiUrl = 'http://localhost:3000/api/dossier-medical';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getDossierByPatientId(patientId: number): Observable<DossierMedical> {
-    return this.http.get<DossierMedical>(`${this.apiUrl}/verifierDossier/${patientId}`);
+  getDossiersByPatientId(patientId: number): Observable<any[]> {
+    return this.http.get<any>(`${this.apiUrl}/patient/${patientId}`).pipe(
+      map(response => response.dossiers)
+    );
   }
 }

@@ -1,71 +1,127 @@
-<div class="dossier-container">
-  <!-- État de chargement -->
-  <mat-card *ngIf="loading" class="loading-card">
-    <mat-card-content>
-      <mat-spinner diameter="50"></mat-spinner>
-      <p>Chargement du dossier médical en cours...</p>
-    </mat-card-content>
-  </mat-card>
+<div class="medical-container">
+  <!-- En-tête avec couleur forcée -->
+  <div class="medical-header">
+    <h1 style="color: #267580; border-bottom: 2px solid #267580">
+      <i class="material-icons" style="color: #267580">medical_services</i>
+      Dossier Médical
+    </h1>
+  </div>
 
-  <!-- Message d'erreur -->
-  <mat-card *ngIf="error" class="error-card">
-    <mat-card-content>
-      <p class="error-message">{{ error }}</p>
-    </mat-card-content>
-  </mat-card>
+  <!-- Chargement -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Chargement en cours...</p>
+  </div>
 
-  <!-- Affichage du dossier -->
-  <div *ngIf="dossier && !loading">
-    <!-- Section Dossier Médical -->
-    <mat-card class="section-card">
-      <mat-card-header>
-        <mat-card-title>Dossier Médical</mat-card-title>
-        <mat-card-subtitle> Statut: {{ dossier.statut }} </mat-card-subtitle>
-      </mat-card-header>
-
-      <mat-divider></mat-divider>
-
-      <mat-card-content>
-        <div class="info-row">
-          <span class="label">Patient:</span>
-          <span
-            >{{ dossier.Patient?.firstName }}
-            {{ dossier.Patient?.lastName }}</span
-          >
-        </div>
-        <div class="info-row">
-          <span class="label">Médecin traitant:</span>
-          <span
-            >{{ dossier.Medecin?.firstName }}
-            {{ dossier.Medecin?.lastName }}</span
-          >
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-    <!-- Section Analyses -->
-    <mat-card
-      class="section-card"
-      *ngIf="dossier.analyses && dossier.analyses.length > 0"
+  <!-- Erreur -->
+  <div *ngIf="errorMessage" class="error-state">
+    <i class="material-icons">error</i>
+    <p>{{ errorMessage }}</p>
+    <button
+      (click)="loadDossiers()"
+      class="retry-btn"
+      style="background: #267580; color: white"
     >
-      <mat-card-header>
-        <mat-card-title>Analyses Médicales</mat-card-title>
-      </mat-card-header>
+      <i class="material-icons">refresh</i> Réessayer
+    </button>
+  </div>
 
-      <mat-divider></mat-divider>
+  <!-- Contenu -->
+  <div *ngIf="!isLoading" class="dossier-content">
+    <!-- Aucun dossier -->
+    <div *ngIf="dossiers.length === 0" class="empty-state">
+      <i class="material-icons">folder_open</i>
+      <p>Aucun dossier médical trouvé</p>
+    </div>
 
-      <mat-card-content>
-        <mat-list>
-          <mat-list-item *ngFor="let analyse of dossier.analyses">
-            <mat-icon matListItemIcon>medical_services</mat-icon>
-            <div matListItemTitle>{{ analyse.nom }}</div>
-            <div matListItemLine>
-              Date: {{ analyse.date | date : "dd/MM/yyyy" }}
+    <!-- Liste des dossiers -->
+    <div
+      *ngFor="let dossier of dossiers"
+      class="dossier-card"
+      style="border-top: 3px solid #267580"
+    >
+      <div class="card-header">
+        <div>
+          <h2 style="color: #267580">Dossier #{{ dossier.id }}</h2>
+          <p class="creation-date" style="color: #267580">
+            <i class="material-icons" style="color: #267580">calendar_today</i>
+            Créé le {{ dossier.createdAt | date : "dd/MM/yyyy" }}
+          </p>
+        </div>
+        <span
+          class="status-badge"
+          [ngStyle]="{
+            'background-color':
+              dossier.statut === 'Actif' ? '#e6f2f4' : '#e0e0e0',
+            color: dossier.statut === 'Actif' ? '#267580' : '#616161',
+            border: dossier.statut === 'Actif' ? '1px solid #267580' : 'none'
+          }"
+        >
+          {{ dossier.statut }}
+        </span>
+      </div>
+
+      <div class="card-body">
+        <div class="info-grid">
+          <div class="info-block" style="border-left: 4px solid #267580">
+            <h3>
+              <i class="material-icons" style="color: #267580">person</i>
+              Patient
+            </h3>
+            <p>
+              {{ dossier.Patient?.firstName }} {{ dossier.Patient?.lastName }}
+            </p>
+          </div>
+
+          <div class="info-block" style="border-left: 4px solid #267580">
+            <h3>
+              <i class="material-icons" style="color: #267580"
+                >medical_services</i
+              >
+              Médecin
+            </h3>
+            <p>
+              Dr. {{ dossier.Medecin?.firstName }}
+              {{ dossier.Medecin?.lastName }}
+            </p>
+            <p class="specialty" style="color: #267580; font-weight: 500">
+              {{ dossier.Medecin?.specialty }}
+            </p>
+          </div>
+        </div>
+
+        <div class="analyses-section">
+          <h3>
+            <i class="material-icons" style="color: #267580">science</i>
+            Analyses Médicales
+          </h3>
+
+          <div *ngIf="dossier.analyse?.length > 0; else noAnalyses">
+            <div
+              *ngFor="let analyse of dossier.analyse"
+              class="analyse-item"
+              style="border-left: 3px solid #267580"
+            >
+              <div class="analyse-header">
+                <h4>{{ analyse.nom }}</h4>
+                <span class="analyse-date" style="color: #267580">
+                  <i class="material-icons" style="color: #267580">event</i>
+                  {{ analyse.date | date : "dd/MM/yyyy" }}
+                </span>
+              </div>
+              <div class="analyse-content">
+                <p><strong>Résultat :</strong> {{ analyse.resultat }}</p>
+              </div>
             </div>
-            <div matListItemLine>Résultats: {{ analyse.resultat }}</div>
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
+          </div>
+          <ng-template #noAnalyses>
+            <div class="no-analyses">
+              <i class="material-icons">info</i>
+              <p>Aucune analyse disponible</p>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

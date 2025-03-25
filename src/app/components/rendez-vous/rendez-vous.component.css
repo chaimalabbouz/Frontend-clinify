@@ -1,0 +1,266 @@
+/* Styles de base */
+.rdv-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Vue Formulaire */
+.form-view {
+  background: #fff;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.form-header h2 {
+  color: #267580;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.form-group span {
+  color: #e74c3c;
+}
+
+.form-input, .form-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  border-left: 3px solid #267580;
+}
+
+.form-input:focus, .form-select:focus {
+  outline: none;
+  border-color: #267580;
+  box-shadow: 0 0 0 3px rgba(38, 117, 128, 0.2);
+}
+
+.btn-submit {
+  background: #267580;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-submit:hover {
+  background: #1e6473;
+}
+
+.btn-submit:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* Vue Liste */
+.list-view {
+  background: #fff;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.list-header h2 {
+  color: #267580;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background: #267580;
+  color: white;
+  font-weight: 500;
+  position: sticky;
+  top: 0;
+}
+
+.date {
+  font-weight: 600;
+  color: #267580;
+}
+
+.doctor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Boutons communs */
+.btn-switch {
+  background: #f8f9fa;
+  color: #267580;
+  border: 1px solid #267580;
+  padding: 10px 20px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-switch:hover {
+  background: #e9f7f9;
+}
+
+/* Alertes */
+.alert {
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.success {
+  background: #e6f7ee;
+  color: #2e7d32;
+  border-left: 4px solid #2e7d32;
+}
+
+.error {
+  background: #f8d7da;
+  color: #721c24;
+  border-left: 4px solid #721c24;
+}
+
+/* États */
+.loading {
+  text-align: center;
+  padding: 2rem;
+}
+
+.spinner {
+  border: 4px solid rgba(38, 117, 128, 0.2);
+  border-top: 4px solid #267580;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.empty {
+  background: #e2f4f7;
+  color: #267580;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-header, .list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .btn-switch {
+    width: 100%;
+    justify-content: center;
+  }
+}
