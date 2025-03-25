@@ -1,27 +1,59 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { CommonModule } from '@angular/common'; 
-import { RouterModule } from '@angular/router';
+import { Observable, Subscription } from 'rxjs'; // Added Subscription import
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
-  isLoggedIn = false;
+export class NavbarComponent implements OnInit, OnDestroy {
+  isLoggedIn$: Observable<boolean>;
+  patientId: string | null = null;
+  private subscriptions = new Subscription();
 
   constructor(private router: Router, private authService: AuthService) {
-    this.authService.isLoggedIn$.subscribe(status => {
-      this.isLoggedIn = status;
-    });
+    this.isLoggedIn$ = this.authService.isLoggedIn$;
+  }
+
+  ngOnInit(): void {
+    // Force initial verification
+    const initialStatus = this.authService.hasToken();
+    this.authService.setLoggedInStatus(initialStatus);
+    
+    // Abonnement pour suivre les changements de connexion
+    this.subscriptions.add(
+      this.isLoggedIn$.subscribe(isLoggedIn => {
+        if (isLoggedIn) {
+          this.patientId = this.authService.getPatientId(); // Récupérer userId à partir de localStorage
+        } else {
+          this.patientId = null;
+        }
+        console.log('Navbar - isLoggedIn:', isLoggedIn, 'patientId:', this.patientId);
+      })
+    );
+  }
+  
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  goToPatientSpace() {
+    if (this.patientId) {
+      this.router.navigate(['/espace-patient', this.patientId]);
+    } else {
+      console.error('ID du patient introuvable.');
+      this.router.navigate(['/login']);
+    }
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']); // Redirection après déconnexion
+    this.router.navigate(['/login']);
   }
 }

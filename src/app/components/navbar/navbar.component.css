@@ -1,15 +1,17 @@
-/* Styles généraux de la navbar */
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  background-color: #ffffff; /* Fond blanc */
-  padding: 10px 20px;
+  background-color: #ffffff;
+  padding: 14px 40px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
   top: 0;
-  left: 0;
+  right: -10px;
+  left: 24px;
+  margin-right: 27px;
+  margin-left: -76px;
   z-index: 1000;
 }
 
@@ -23,6 +25,14 @@
 .logo-image {
   height: 50px;
   width: auto;
+}
+
+/* Centrage des liens */
+.navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  max-width: 600px;
 }
 
 /* Liste des liens */
@@ -48,18 +58,23 @@
 }
 
 .nav-links a:hover {
-  color: #007bff; /* Bleu */
+  color: #007bff;
 }
 
 /* Bouton Se Déconnecter */
-.nav-links li:last-child a {
-  background-color: #dc3545; /* Rouge */
-  color: white;
-  border-radius: 5px;
+.logout-btn {
+  padding-left: 20px;
 }
 
-.nav-links li:last-child a:hover {
-  background-color: #c82333;
+.logout-btn a {
+  background-color: #267580;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 15px;
+}
+
+.logout-btn a:hover {
+  background-color: #173b40;
 }
 
 /* Responsive */
@@ -68,6 +83,12 @@
     flex-direction: column;
     align-items: center;
     padding: 10px;
+  }
+
+  .navbar-center {
+    justify-content: center;
+    width: 100%;
+    max-width: none;
   }
 
   .nav-links {
@@ -79,5 +100,10 @@
   .nav-links a {
     display: block;
     text-align: center;
+  }
+
+  .logout-btn {
+    padding-left: 0;
+    margin-top: 10px;
   }
 }

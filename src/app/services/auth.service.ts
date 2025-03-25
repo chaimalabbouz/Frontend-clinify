@@ -7,51 +7,88 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:3000/api/auth'; // Base URL du backend
-  private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken()); // ✅ État de connexion
+  private baseUrl = 'http://localhost:3000/api/auth';
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient) {}
-
-  // Observable pour suivre l’état de connexion
-  isLoggedIn$ = this.isLoggedInSubject.asObservable();
-
-  private hasToken(): boolean {
-    return typeof window !== 'undefined' && !!localStorage.getItem('token');
+  constructor(private http: HttpClient) {
+    // Initialisation différée pour s'assurer que le localStorage est disponible
+    setTimeout(() => {
+      this.isLoggedInSubject.next(this.hasToken());
+    });
   }
 
-  // Inscription
-// Inscription d'un patient (Front-office)
-registerPatient(userData: any): Observable<any> {
-  const patientData = { ...userData, role: 'patient' }; // ✅ Ajoute le rôle 'patient'
-  return this.http.post<any>('http://localhost:3000/api/auth/register', patientData);
-}
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
+  public hasToken(): boolean {
+    try {
+      const token = localStorage.getItem('token');
+      const patientId = localStorage.getItem('patientId');
+      return !!token && !!patientId;
+    } catch (e) {
+      return false;
+    }
+  }
+  
+    // Expose a method to set login status publicly
+    public setLoggedInStatus(status: boolean): void {
+      this.isLoggedInSubject.next(status);
+    }
 
-  // Connexion avec mise à jour automatique du statut
+  // Inscription d'un patient (Front-office)
+  registerPatient(userData: any): Observable<any> {
+    const patientData = { ...userData, role: 'patient' }; // Ajoute le rôle 'patient'
+    return this.http.post<any>('http://localhost:3000/api/auth/register', patientData);
+  }
+
+  // Login (connexion)
   login(credentials: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/login`, credentials).pipe(
       tap(response => {
-        this.saveToken(response.token, response.role);
+        console.log('Réponse de l\'API:', response); // Vérification de la réponse de l'API
+  
+        // Enregistrer le token, le role et le userId dans le localStorage
+        this.saveToken(response.token, response.role, response.userId);
+        
+        console.log('userId après la connexion:', response.userId); // Debug
+  
+        // Mettre à jour le statut de connexion
+        this.isLoggedInSubject.next(true);
       })
     );
   }
+  
+  
 
-  // Sauvegarde du token et mise à jour du statut
-  saveToken(token: string, role: string): void {
-    localStorage.setItem('token', token);
+  // Enregistre le token et l'ID du patient dans localStorage
+  saveToken(token: string, role: string, userId: number) {
+    localStorage.setItem('authToken', token);
     localStorage.setItem('role', role);
-    this.isLoggedInSubject.next(true); // ✅ Met à jour le statut de connexion
+    localStorage.setItem('userId', userId.toString());  // Stocke userId sous forme de chaîne de caractères
   }
+  
+  
+  
+  // Récupère l'ID du patient depuis localStorage
+  public getPatientId(): string | null {
+    const patientId = localStorage.getItem('userId');  // Utilisez 'userId' au lieu de 'patientId'
+    console.log('ID du patient récupéré depuis localStorage:', patientId);
+    return patientId;
+  }
+  
 
-  // Récupération du token
-  getToken(): string | null {
-    return typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  // Récupère le token depuis localStorage
+  public getToken(): string | null {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('token');
+    }
+    return null;
   }
 
   // Déconnexion et mise à jour du statut
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
-    this.isLoggedInSubject.next(false); // ✅ Met à jour le statut de connexion
+    localStorage.removeItem('patientId');
+    this.isLoggedInSubject.next(false); // Met à jour le statut de connexion
   }
 }

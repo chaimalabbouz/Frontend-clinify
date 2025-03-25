@@ -15,16 +15,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'contact', component: ContactComponent },
-  {
-    path: 'espace-patient',
-    component: PatientSpaceComponent,
-    children: [
-      { path: 'dossier', component: DossierMedicalComponent },
-      { path: 'rendez-vous', component: RendezVousComponent },
-      { path: 'nouveau-rdv', component: PrendreRendezVousComponent },
-      { path: '', redirectTo: 'dossier', pathMatch: 'full' }
-    ]
-  },
-  { path: '', redirectTo: 'espace-patient', pathMatch: 'full' },
-  { path: '**', redirectTo: '' } // Redirection pour les routes inconnues
+  { path: 'espace-patient/:id', component: PatientSpaceComponent },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '**', redirectTo: '' }
 ];

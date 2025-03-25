@@ -1,11 +1,24 @@
-.patient-container {
-  display: flex;
-  min-height: 100vh;
+/* patient-space.component.css */
+.patient-profile {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 600px;
+  margin: 20px auto;
+  margin-top: 151px;
 }
 
-.content-area {
-  flex: 1;
-  margin-left: 250px; /* Largeur de la sidebar */
-  padding: 20px;
-  background-color: #f5f5f5;
+.patient-profile h2 {
+  text-align: center;
+  color: #333;
+}
+
+.patient-profile p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.patient-profile strong {
+  color: #555;
 }

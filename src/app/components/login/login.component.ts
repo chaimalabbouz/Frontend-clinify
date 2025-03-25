@@ -27,8 +27,12 @@ export class LoginComponent {
       this.authService.login(this.loginForm.value).subscribe({
         next: response => {
           console.log('Connexion réussie', response);
-          this.authService.saveToken(response.token, response.role); // ✅ Sauvegarde du token avec AuthService
-          this.router.navigate(['/dashboard']); // ✅ Redirection après connexion
+          
+          // Stocker le token, le rôle et le userId dans localStorage
+          this.authService.saveToken(response.token, response.role, response.userId);
+          
+          // Rediriger vers le dashboard
+          this.router.navigate(['/dashboard']);
         },
         error: error => {
           console.error('Erreur de connexion', error);
@@ -37,4 +41,6 @@ export class LoginComponent {
       });
     }
   }
+  
+  
 }
