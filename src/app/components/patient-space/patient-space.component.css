@@ -1,11 +1,82 @@
-.patient-container {
-  display: flex;
-  min-height: 100vh;
+/* patient-space.component.css */
+.patient-profile {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #ffffff;
+  max-width: 600px;
+  margin: 20px auto;
+  margin-top: 100px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.content-area {
-  flex: 1;
-  margin-left: 250px; /* Largeur de la sidebar */
-  padding: 20px;
-  background-color: #f5f5f5;
+.patient-profile h2 {
+  text-align: center;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+  margin-bottom: 20px;
 }
+
+.patient-info {
+  display: grid;
+  gap: 12px;
+}
+
+.profile-item {
+  font-size: 16px;
+  color: #555;
+}
+
+.profile-item strong {
+  color: #333;
+}
+
+.loading-message {
+  text-align: center;
+  color: #888;
+}
+
+.payment-icon {
+  text-align: center;
+}
+
+.payment-icon a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 41px;
+  height: 43px;
+  border-radius: 50%;
+  background-color: #267580;
+  color: white;
+  font-size: 28px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: background-color 0.3s, transform 0.3s;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.payment-icon a::before {
+  content: "\f09d"; /* Icône "credit-card" de Font Awesome */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: white; /* Transparence pour effet de fond */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.payment-icon a i {
+  position: relative;
+  z-index: 1;
+  font-size: 1px; /* Taille de l'icône ajustée */
+
+}
+
+.payment-icon a:hover {
+  background-color: #1c4b51;
+  transform: scale(1.1);
+}
+

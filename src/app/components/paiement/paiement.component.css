@@ -1,0 +1,44 @@
+.paiement-container {
+    width: 300px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 119px;
+
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-top: 10px;
+  }
+  
+  input, select, button {
+    margin-top: 5px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    background-color: #267580;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    margin-top: 15px;
+  }
+  
+  button:hover {
+    background-color: #1d464b;
+  }
+  

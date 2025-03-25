@@ -1,0 +1,65 @@
+/* Fond bleu de toute la page */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('/assets/images/inscrire.jpg') no-repeat center center/cover;
+  background-attachment: fixed; /* Fixe l'image en place */
+  position: relative; /* Permet d'ajouter des éléments par-dessus l'image */
+  overflow: auto; /* Permet de défiler si nécessaire */
+}
+  
+
+/* Container pour le formulaire */
+.login-container {
+    width: 400px;
+    background: rgba(255, 255, 255, 0.8); /* Fond semi-transparent pour l'effet glissant */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    backdrop-filter: blur(10px); /* Ajoute l'effet flou derrière le formulaire */
+    position: relative; /* Assure que tout est bien positionné dans le conteneur */
+    z-index: 10; /* Assure que le formulaire est au-dessus de l'image de fond */
+    margin: auto;
+    margin-top: 183px;
+  }
+
+/* Logo de la page de connexion */
+.logo {
+  width: 50px;
+  margin-bottom: 20px;
+}
+
+/* Style du titre */
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Style des champs du formulaire */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Style du bouton */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #267580;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Erreur */
+.error {
+  color: red;
+  margin-top: 10px;
+}
