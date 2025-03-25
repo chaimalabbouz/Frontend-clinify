@@ -1,0 +1,28 @@
+<div class="paiement-container">
+    <h2>Effectuer un paiement</h2>
+    <form (ngSubmit)="payer()">
+      <label for="montant">Montant :</label>
+      <input type="number" id="montant" [(ngModel)]="montant" name="montant" required />
+  
+      <label for="methode">Méthode de paiement :</label>
+      <select id="methode" [(ngModel)]="methodePaiement" name="methodePaiement">
+        <option value="carte">Carte bancaire</option>
+        <option value="cash">Espèces</option>
+      </select>
+  
+      <label for="firstName">Prénom :</label>
+      <input type="text" id="firstName" [(ngModel)]="firstName" name="firstName" required />
+  
+      <label for="lastName">Nom :</label>
+      <input type="text" id="lastName" [(ngModel)]="lastName" name="lastName" required />
+  
+      <label for="email">Email :</label>
+      <input type="email" id="email" [(ngModel)]="email" name="email" required />
+  
+      <label for="idRdv">ID RDV :</label>
+      <input type="number" id="idRdv" [(ngModel)]="idRdv" name="idRdv" required />
+  
+      <button type="submit">Payer</button>
+    </form>
+  </div>
+  

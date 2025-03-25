@@ -29,7 +29,7 @@ export class LoginComponent {
           console.log('Connexion réussie', response);
           
           // Stocker le token, le rôle et le userId dans localStorage
-          this.authService.saveToken(response.token, response.role, response.userId);
+          this.authService.saveToken(response.token, response.role, response.userId, response.userName);
           
           // Rediriger vers le dashboard
           this.router.navigate(['/dashboard']);

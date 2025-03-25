@@ -1,32 +1,46 @@
 <nav class="navbar">
   <div class="navbar-brand">
     <a routerLink="/" class="logo">
-      <img src="/assets/images/clinify.jpeg" alt="Clinify Logo" class="logo-image" />
+      <img src="/assets/images/logoFooterLight.png" alt="Clinify Logo" class="logo-image" />
     </a>
   </div>
-  <ul class="nav-links">
-    <li><a routerLink="/">Accueil</a></li>
-    <li><a routerLink="/about">À propos</a></li>
-    <li><a routerLink="/services">Services</a></li>
-    <li><a routerLink="/contact">Contact</a></li>
 
-    <!-- ✅ Afficher Se Connecter et S'inscrire si l'utilisateur N'EST PAS connecté -->
-    <li *ngIf="!(isLoggedIn$ | async)">
-      <a routerLink="/login">Se Connecter</a>
-    </li>
-    <li *ngIf="!(isLoggedIn$ | async)">
-      <a routerLink="/register">S'inscrire</a>
-    </li>
+  <div class="navbar-center">
+    <ul class="nav-links">
+      <li><a routerLink="/">Accueil</a></li>
+      <li><a routerLink="/about">À propos</a></li>
+      <li><a routerLink="/services">Services</a></li>
+      <li><a routerLink="/contact">Contact</a></li>
 
-    <!-- Afficher Profil si l'utilisateur est connecté -->
-    <li *ngIf="isLoggedIn$ | async">
-      <button (click)="goToPatientSpace()">Profil</button>
-      <span *ngIf="patientId">Patient ID: {{ patientId }}</span>
-    </li>
-    
+
+    </ul>
+  </div>
+  <div class="navbar-right">
+    <ul class="nav-links">
+            <!-- ✅ Afficher Se Connecter et S'inscrire si l'utilisateur N'EST PAS connecté -->
+            <li *ngIf="!(isLoggedIn$ | async)">
+              <a routerLink="/login">Se Connecter</a>
+            </li>
+            <li *ngIf="!(isLoggedIn$ | async)">
+              <a routerLink="/register">S'inscrire</a>
+            </li>
+    </ul>
+ 
+  </div>  
+
+  <!-- Div pour les éléments à droite -->
+  <div class="navbar-right">
     <!-- ✅ Afficher Se Déconnecter si l'utilisateur EST connecté -->
-    <li *ngIf="isLoggedIn$ | async">
-      <a (click)="logout()">Se Déconnecter</a>
-    </li>
-  </ul>
+    <ul class="nav-links">
+      <li *ngIf="isLoggedIn$ | async" style="margin-top: 10px;">
+        <a (click)="logout()">Se Déconnecter</a>
+      </li>
+
+      <li *ngIf="isLoggedIn$ | async" class="user-initial">
+        <button (click)="goToPatientSpace()" class="user-initial-btn">
+          {{ userInitial }}
+        </button>
+      </li>
+    </ul>
+  </div>
 </nav>

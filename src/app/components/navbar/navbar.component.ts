@@ -14,6 +14,8 @@ import { Observable, Subscription } from 'rxjs'; // Added Subscription import
 export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn$: Observable<boolean>;
   patientId: string | null = null;
+  userName: string | null = null; // Ajouté pour stocker le nom de l'utilisateur
+  userInitial: string | null = null; // Ajouté pour stocker l'initiale de l'utilisateur
   private subscriptions = new Subscription();
 
   constructor(private router: Router, private authService: AuthService) {
@@ -21,19 +23,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // Force initial verification
     const initialStatus = this.authService.hasToken();
     this.authService.setLoggedInStatus(initialStatus);
-    
-    // Abonnement pour suivre les changements de connexion
+  
     this.subscriptions.add(
       this.isLoggedIn$.subscribe(isLoggedIn => {
         if (isLoggedIn) {
-          this.patientId = this.authService.getPatientId(); // Récupérer userId à partir de localStorage
+          this.patientId = this.authService.getPatientId();
+          this.userName = this.authService.getUserName();
+  
+          // Get the first letter of the user's name and convert it to uppercase
+          this.userInitial = this.userName ? this.userName.charAt(0).toUpperCase() : '';
         } else {
           this.patientId = null;
+          this.userName = null;
+          this.userInitial = null;
         }
-        console.log('Navbar - isLoggedIn:', isLoggedIn, 'patientId:', this.patientId);
       })
     );
   }
@@ -56,4 +61,5 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+  
 }

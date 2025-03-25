@@ -8,6 +8,7 @@ import { RendezVousComponent } from './components/rendez-vous/rendez-vous.compon
 import { PrendreRendezVousComponent } from './components/prendre-rendez-vous/prendre-rendez-vous.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { PaiementComponent } from './components/paiement/paiement.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'espace-patient/:id', component: PatientSpaceComponent },
+  { path: 'paiement', component: PaiementComponent }, // Route pour le paiement
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '**', redirectTo: '' }
 ];

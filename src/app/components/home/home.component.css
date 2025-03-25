@@ -1,14 +1,40 @@
 .home-container {
-    width: 100%;
-    height: 100vh; /* Prend toute la hauteur de l'écran */
-    overflow: hidden; /* Empêche le défilement */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .home-image {
-    width: 100%;
-    height: 99%;
-    object-fit: cover; /* Assure que l'image couvre tout l'espace sans déformation */
-  }
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.home-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 10%; /* Ajusté pour mieux aligner à gauche */
+  transform: translate(0, -50%);
+  text-align: left;
+  font-weight: 700;
+  color: #36415a; /* Meilleur contraste */
+  font-family: "Poppins", sans-serif; /* Uniformisation */
+  padding: 20px;
+  width: 50%;
+  line-height: 1.3;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Améliore lisibilité */
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.slogan {
+  font-size: 20px;
+}

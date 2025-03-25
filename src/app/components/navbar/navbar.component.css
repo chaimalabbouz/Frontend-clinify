@@ -1,8 +1,8 @@
 .navbar {
   display: flex;
-  justify-content: space-around;
+  justify-content:space-around; /* Centre tout le contenu de la navbar */
   align-items: center;
-  background-color: #ffffff;
+  background-color: rgba(0, 0, 0, 0);
   padding: 14px 40px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: fixed;
@@ -13,6 +13,10 @@
   margin-right: 27px;
   margin-left: -76px;
   z-index: 1000;
+}
+
+.nav-links li a[href="/"] {
+  color: #267580 !important;
 }
 
 /* Logo */
@@ -27,13 +31,16 @@
   width: auto;
 }
 
-/* Centrage des liens */
-.navbar-center {
-  flex: 1;
+
+
+.navbar-right {
   display: flex;
-  justify-content: center;
-  max-width: 600px;
+  justify-content: flex-end; /* Aligne les éléments à droite */
+  align-items: center;
+  text-align: center; /* Centre le texte à l'intérieur de chaque élément */
+  margin-top: 10px;
 }
+
 
 /* Liste des liens */
 .nav-links {
@@ -43,14 +50,15 @@
   margin: 0;
   padding: 0;
 }
-
-.nav-links li {
-  display: inline-block;
+.nav-links li a {
+  font-family: "Poppins", sans-serif; /* Ou "Roboto", "Open Sans" */
+  font-weight: 300; /* Fine (Light) */
 }
+
 
 .nav-links a {
   text-decoration: none;
-  color: #333;
+  color: #555555;
   font-size: 16px;
   font-weight: 600;
   padding: 10px 15px;
@@ -58,7 +66,7 @@
 }
 
 .nav-links a:hover {
-  color: #007bff;
+  color: #267580;
 }
 
 /* Bouton Se Déconnecter */
@@ -107,3 +115,30 @@
     margin-top: 10px;
   }
 }
+/* Styles pour l'initiale de l'utilisateur dans un cercle */
+.user-initial-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #267580;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+.user-initial-btn:hover {
+  background-color: #0d5963;
+}
+
+.user-initial {
+  display: inline-block;
+  margin-top: 5px;
+}
+

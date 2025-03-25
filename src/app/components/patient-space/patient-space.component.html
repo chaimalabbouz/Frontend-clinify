@@ -1,14 +1,28 @@
 <!-- patient-space.component.html -->
 <div class="patient-profile">
-  <h2>Profil du Patient</h2>
+  <h2>Votre Profile</h2>
 
-  <div *ngIf="patient; else loading">
-    <p><strong>Nom :</strong> {{ patient.firstName }} {{ patient.lastName }}</p>
-    <p><strong>Email :</strong> {{ patient.email }}</p>
-    <p><strong>Date de naissance :</strong> {{ patient.dateOfBirth | date: 'dd/MM/yyyy' }}</p>
+  <div *ngIf="patient; else loading" class="patient-info">
+    <div class="profile-item">
+      <strong>Nom :</strong> {{ patient.firstName }} {{ patient.lastName }}
+    </div>
+    <div class="profile-item">
+      <strong>Email :</strong> {{ patient.email }}
+    </div>
+    <div class="profile-item">
+      <strong>Date de naissance :</strong> {{ patient.dateOfBirth | date: 'dd/MM/yyyy' }}
+    </div>
   </div>
 
   <ng-template #loading>
-    <p>Chargement des données...</p>
+    <p class="loading-message">Chargement des données...</p>
   </ng-template>
+
+  <div class="payment-icon">
+    <a routerLink="/paiement">
+      <i class="fas fa-credit-card"></i>
+    </a>
+  </div>
+  
+  
 </div>

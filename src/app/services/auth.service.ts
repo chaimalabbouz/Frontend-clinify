@@ -47,7 +47,7 @@ export class AuthService {
         console.log('Réponse de l\'API:', response); // Vérification de la réponse de l'API
   
         // Enregistrer le token, le role et le userId dans le localStorage
-        this.saveToken(response.token, response.role, response.userId);
+        this.saveToken(response.token, response.role, response.userId, response.userName);
         
         console.log('userId après la connexion:', response.userId); // Debug
   
@@ -60,14 +60,14 @@ export class AuthService {
   
 
   // Enregistre le token et l'ID du patient dans localStorage
-  saveToken(token: string, role: string, userId: number) {
-    localStorage.setItem('authToken', token);
-    localStorage.setItem('role', role);
-    localStorage.setItem('userId', userId.toString());  // Stocke userId sous forme de chaîne de caractères
-  }
-  
-  
-  
+// In AuthService
+saveToken(token: string, role: string, userId: number, userName: string) {
+  localStorage.setItem('authToken', token);
+  localStorage.setItem('role', role);
+  localStorage.setItem('userId', userId.toString()); // Store userId as a string
+  localStorage.setItem('userName', userName); // Save userName to localStorage
+}
+
   // Récupère l'ID du patient depuis localStorage
   public getPatientId(): string | null {
     const patientId = localStorage.getItem('userId');  // Utilisez 'userId' au lieu de 'patientId'
@@ -75,6 +75,12 @@ export class AuthService {
     return patientId;
   }
   
+// In AuthService
+public getUserName(): string | null {
+  return localStorage.getItem('userName'); // Retrieve userName from localStorage
+}
+
+
 
   // Récupère le token depuis localStorage
   public getToken(): string | null {
