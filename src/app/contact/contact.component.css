@@ -1,11 +1,10 @@
-/* Navbar */
+/* Navbar
 .navbar {
     background-color: #333;
     color: white;
     padding: 10px 20px;
   }
   
-  /* Bande d'image */
   .contact-image {
     position: relative;
     width: 100%;
@@ -19,7 +18,6 @@
     display: block;
   }
   
-  /* Texte sur l'image */
   .image-text {
     position: absolute;
     top: 50%;
@@ -31,7 +29,6 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
   
-  /* Section de contact */
   .contact-section {
     padding: 40px 20px;
     max-width: 1200px;
@@ -39,7 +36,6 @@
     text-align: center;
   }
   
-  /* Titre de la section */
   .contact-title {
     color: #267580;
     font-size: 2.5rem;
@@ -47,7 +43,6 @@
     margin-bottom: 40px;
   }
   
-  /* Informations de contact */
   .contact-info {
     display: flex;
     justify-content: center;
@@ -56,7 +51,6 @@
     font-size: 1rem;
   }
   
-  /* Élément d'information */
   .info-item {
     display: flex;
     align-items: center;
@@ -72,8 +66,185 @@
     background-color: #c0d4d7;
   }
   
-  /* Icônes Material */
   .icon {
     font-size: 1.5rem;
     color: #267580;
+  } */
+
+  #footer-section {
+    background-color: #f4f4f4;
+    padding: 40px 0;
+    color: #333;
   }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .footer-widget {
+    width: 23%;
+    margin-bottom: 30px;
+  }
+  
+  .footer-widget h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .footer-widget ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .footer-widget ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-widget ul li a {
+    text-decoration: none;
+    color: #555;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-widget ul li a:hover {
+    color: #007bff;
+  }
+  
+  .brand-logo img {
+    max-width: 70px;
+    margin-bottom: 15px;
+  }
+  
+  .social-icon-circle ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .social-icon-circle ul li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .social-icon-circle ul li a {
+    color: #555;
+    font-size: 20px;
+    transition: color 0.3s ease;
+  }
+  
+  .social-icon-circle ul li a:hover {
+    color: #007bff;
+  }
+  
+  .store-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .store-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    margin-right: 15px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .store-btn .icon-wrap {
+    margin-right: 10px;
+  }
+  
+  .store-btn.bg-royal-blue {
+    background-color: #007bff;
+  }
+  
+  .store-btn.bg-default-black {
+    background-color: #333;
+  }
+  
+  .store-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .store-btn.bg-default-black:hover {
+    background-color: #111;
+  }
+  
+  .payment-cards img {
+    max-width: 120px;
+    margin-top: 15px;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .footer-bottom p {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  @media (max-width: 991px) {
+    .footer-widget {
+      width: 48%;
+      margin-bottom: 20px;
+    }
+  
+    .footer-widget.links-widget,
+    .footer-widget.store-info-widget {
+      width: 48%;
+    }
+  
+    .store-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .store-btn {
+      margin-bottom: 10px;
+    }
+  
+    .footer-bottom p {
+      font-size: 12px;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .footer-widget {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+  .image-container {
+    width: 100%;
+    height: 250px;
+    position: relative;
+  }
+  
+  .image-container img {
+    height: 20em;
+    max-width: 50%;
+    vertical-align: middle;
+    border-style: none;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+  }
+  
