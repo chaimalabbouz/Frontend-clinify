@@ -1,3 +1,8 @@
+<!-- Utilisez des classes CSS au lieu d'attributs de style en ligne -->
+<div *ngIf="showSidebar" id="sidebar" class="sidebar">
+  <app-sidebar></app-sidebar>
+</div>
+
 <div class="medical-container">
   <!-- En-tête avec couleur forcée -->
   <div class="medical-header">
@@ -29,14 +34,14 @@
   <!-- Contenu -->
   <div *ngIf="!isLoading" class="dossier-content">
     <!-- Aucun dossier -->
-    <div *ngIf="dossiers.length === 0" class="empty-state">
+    <div *ngIf="dossierList.length === 0" class="empty-state">
       <i class="material-icons">folder_open</i>
       <p>Aucun dossier médical trouvé</p>
     </div>
 
     <!-- Liste des dossiers -->
     <div
-      *ngFor="let dossier of dossiers"
+      *ngFor="let dossier of dossierList"
       class="dossier-card"
       style="border-top: 3px solid #267580"
     >
@@ -75,9 +80,7 @@
 
           <div class="info-block" style="border-left: 4px solid #267580">
             <h3>
-              <i class="material-icons" style="color: #267580"
-                >medical_services</i
-              >
+              <i class="material-icons" style="color: #267580">medical_services</i>
               Médecin
             </h3>
             <p>
@@ -125,3 +128,4 @@
     </div>
   </div>
 </div>
+

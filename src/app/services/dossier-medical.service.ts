@@ -12,7 +12,13 @@ export class DossierMedicalService {
 
   getDossiersByPatientId(patientId: number): Observable<any[]> {
     return this.http.get<any>(`${this.apiUrl}/patient/${patientId}`).pipe(
-      map(response => response.dossiers)
+      map(response => {
+        // Vérification de l'existence du champ 'dossiers'
+        if (!response.dossiers) {
+          throw new Error('Aucun dossier médical trouvé pour ce patient');
+        }
+        return response.dossiers;
+      })
     );
   }
 }

@@ -2,15 +2,18 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PaiementService } from '../../services/paiement.service';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-paiement',
   standalone: true,
-  imports: [CommonModule, FormsModule], // Import des modules nécessaires
+  imports: [CommonModule, FormsModule, SidebarComponent], // Import des modules nécessaires
   templateUrl: './paiement.component.html',
   styleUrls: ['./paiement.component.css']
 })
 export class PaiementComponent {
+  showSidebar: boolean = true; // Affiche toujours la sidebar
+
   montant: number = 0;
   methodePaiement: string = 'carte';
   firstName: string = '';

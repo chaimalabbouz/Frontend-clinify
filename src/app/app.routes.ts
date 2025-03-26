@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
-import { PatientSpaceComponent } from './components/patient-space/patient-space.component';
 import { DossierMedicalComponent } from './components/dossier-medical/dossier-medical.component';
 import { RendezVousComponent } from './components/rendez-vous/rendez-vous.component';
 import { LoginComponent } from './components/login/login.component';
@@ -20,19 +19,11 @@ export const routes: Routes = [
   {path: 'sidebar', component : SidebarComponent},
   
   // Version sans children - routes plates
-  { path: 'espace-patient', component: PatientSpaceComponent },
-  { path: 'espace-patient/:id', component: PatientSpaceComponent },
-  { path: 'espace-patient/dossier', component: DossierMedicalComponent },
-  { 
-    path: 'espace-patient/rendez-vous', 
-    component: RendezVousComponent,
-    data: { showForm: false } 
-  },
-  { 
-    path: 'espace-patient/nouveau-rdv', 
-    component: RendezVousComponent,
-    data: { showForm: true } 
-  },
+  { path: 'dossier', component: DossierMedicalComponent },
+  { path: 'rendez-vous', component: RendezVousComponent},
+  { path: 'nouveau-rdv', component: RendezVousComponent},
+
+
 
   // Gestion des routes inconnues (doit être la dernière)
   { path: '**', redirectTo: '' }

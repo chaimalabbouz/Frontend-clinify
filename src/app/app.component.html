@@ -2,3 +2,6 @@
 <div class="content">
   <router-outlet></router-outlet>
 </div>
+
+<!-- Affiche le composant Contact uniquement si la condition est remplie -->
+<app-contact *ngIf="shouldDisplayContact"></app-contact>

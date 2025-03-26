@@ -2,10 +2,12 @@
   width: 250px;
   height: 100vh;
   position: fixed;
-  background: #267580;
-  color: white;
+  background: #deebed;
+  color: black;
   padding: 20px 0;
   box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  margin-top: -33px;
+
 }
 .sidebar-header {
   display: flex;
@@ -29,7 +31,25 @@
   text-align: center;
   padding: 20px 0;
   border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-top: 88px;
+
 }
+.profile-avatar {
+  width: 50px;
+  height: 50px;
+  background-color: #007bff; /* Bleu (modifiable) */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 24px; /* Taille de l'icône */
+}
+
+.mat-icon {
+  font-size: 30px; /* Ajuste la taille de l'icône */
+}
+
 
 .profile-img {
   width: 80px;
@@ -55,7 +75,7 @@
   align-items: center;
   gap: 10px;
   padding: 12px 20px;
-  color: white;
+  color: black;
   text-decoration: none;
   transition: all 0.3s;
 }

@@ -1,7 +1,7 @@
-<!-- patient-space.component.html -->
-<div class="patient-profile">
-  <h2>Votre Profile</h2>
 
+<div class="patient-profile">
+
+  
   <div *ngIf="patient; else loading" class="patient-info">
     <div class="profile-item">
       <strong>Nom :</strong> {{ patient.firstName }} {{ patient.lastName }}
@@ -18,11 +18,6 @@
     <p class="loading-message">Chargement des données...</p>
   </ng-template>
 
-  <div class="payment-icon">
-    <a routerLink="/paiement">
-      <i class="fas fa-credit-card"></i>
-    </a>
-  </div>
   
   
 </div>

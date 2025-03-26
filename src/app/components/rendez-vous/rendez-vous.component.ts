@@ -1,58 +1,77 @@
 import { Component, OnInit } from '@angular/core';
 import { RendezVousService } from '../../services/rendez-vous.service';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { RouterModule, ActivatedRoute, Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms'; // <-- Import du ReactiveFormsModule
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-rendez-vous',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, DatePipe],
   templateUrl: './rendez-vous.component.html',
-  styleUrls: ['./rendez-vous.component.css']
+  styleUrls: ['./rendez-vous.component.css'],
+  imports: [CommonModule,ReactiveFormsModule, SidebarComponent]  // Assure-toi que CommonModule est importé
 })
 export class RendezVousComponent implements OnInit {
-  // Propriétés du composant
-  rendezVousList: any[] = []; // Liste des RDV
-  isLoading = true; // État de chargement
-  errorMessage = ''; // Messages d'erreur
-  patientId = 1; // ID patient (à adapter)
-  today: Date = new Date(); // Date du jour pour validation
-
-  // Gestion du formulaire
+  showSidebar: boolean = false;
+  rendezVousList: any[] = [];
+  isLoading = true;
+  errorMessage = '';
+  patientId: number | null = null;
+  today: Date = new Date();
   showForm = false;
-  rdvForm: any;
+  rdvForm: any;  // Declare the form group variable here
+
   successMessage = '';
 
   constructor(
     private rendezVousService: RendezVousService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
-    // Initialisation du formulaire
+    private fb: FormBuilder,  // This is correctly injected here
+    private router: Router,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
     this.rdvForm = this.fb.group({
       date: ['', Validators.required],
       heure: ['', [Validators.required, Validators.pattern(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/)]],
       typeRendezVous: ['Consultation', Validators.required],
       IdMedecin: ['', Validators.required]
     });
-  }
-
-  ngOnInit(): void {
-    // Détermine la vue à afficher selon l'URL
+    
+    this.loadPatientId();
+    
+    // Afficher le formulaire ou la liste en fonction de l'URL
     this.showForm = this.router.url.includes('nouveau-rdv');
-    this.loadRendezVous();
+    
+    // Cette condition est utilisée pour afficher ou masquer la sidebar
+    this.showSidebar = this.router.url.includes('rendez-vous') || this.router.url.includes('nouveau-rdv');
+    
+    if (this.patientId) {
+      this.loadRendezVous();
+    }
+  
+    // Gérer l'affichage dynamique de la sidebar lors des changements de route
+    this.router.events.subscribe(() => {
+      this.showSidebar = this.router.url.includes('rendez-vous') || this.router.url.includes('nouveau-rdv');
+    });
+  }
+  
+
+  loadPatientId(): void {
+    const patientId = this.authService.getPatientId();
+    this.patientId = patientId ? Number(patientId) : null;
+    if (!this.patientId) {
+      this.errorMessage = 'Patient ID not found, please log in again';
+    }
   }
 
-  /**
-   * Charge les rendez-vous du patient
-   */
   loadRendezVous(): void {
     this.isLoading = true;
-    this.rendezVousService.getRendezVousByPatientId(this.patientId)
-      .subscribe({
+    if (this.patientId) {
+      this.rendezVousService.getRendezVousByPatientId(this.patientId).subscribe({
         next: (data) => {
           this.rendezVousList = data;
           this.isLoading = false;
@@ -63,36 +82,24 @@ export class RendezVousComponent implements OnInit {
           this.isLoading = false;
         }
       });
-  }
-
-  /**
-   * Bascule entre liste et formulaire
-   */
-  toggleView(): void {
-    if (this.showForm) {
-      this.router.navigate(['/espace-patient/rendez-vous']);
-    } else {
-      this.router.navigate(['/espace-patient/nouveau-rdv']);
     }
   }
 
-  /**
-   * Soumet le formulaire
-   */
+  toggleView(): void {
+    this.router.navigate([this.showForm ? '/rendez-vous' : '/nouveau-rdv']);
+  }
+
   onSubmit(): void {
-    if (this.rdvForm.valid) {
+    if (this.rdvForm.valid && this.patientId) {
       const formData = {
         ...this.rdvForm.value,
         IdPatient: this.patientId
       };
-
       this.rendezVousService.createRendezVous(formData).subscribe({
         next: (res) => {
           this.successMessage = 'RDV créé avec succès!';
           this.loadRendezVous();
-          this.rdvForm.reset({
-            typeRendezVous: 'Consultation'
-          });
+          this.rdvForm.reset({ typeRendezVous: 'Consultation' });
           this.router.navigate(['/espace-patient/rendez-vous']);
         },
         error: (err) => {
@@ -102,4 +109,5 @@ export class RendezVousComponent implements OnInit {
       });
     }
   }
+
 }

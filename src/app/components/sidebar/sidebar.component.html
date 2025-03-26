@@ -1,24 +1,23 @@
 <nav class="sidebar">
-  <!-- En-tête -->
-  <div class="sidebar-header">
-    <h2 class="clinify-title">Clinify services médicaux</h2>
-  </div>
+
 
   <!-- Section profil -->
   <div class="profile-section">
     <img
-      src="assets/images/profile.png"
+      src="assets/images/utilisateur.png"
       alt="Photo de profil"
       class="profile-img"
     />
-    <p class="welcome-msg">Bienvenue, [Prénom]</p>
+    <p class="welcome-msg">
+      {{ patient?.firstName || 'Utilisateur' }}
+    </p>
   </div>
 
   <!-- Liens de navigation -->
   <div class="nav-links">
     <!-- Lien Dossier Médical -->
     <a
-      routerLink="/espace-patient/dossier"
+      routerLink="/dossier"
       routerLinkActive="active"
       class="nav-link"
     >
@@ -28,7 +27,7 @@
 
     <!-- Lien Mes Rendez-vous -->
     <a
-      routerLink="/espace-patient/rendez-vous"
+      routerLink="/rendez-vous"
       routerLinkActive="active"
       class="nav-link"
     >
@@ -38,12 +37,22 @@
 
     <!-- Lien Prendre RDV -->
     <a
-      routerLink="/espace-patient/nouveau-rdv"
+      routerLink="/nouveau-rdv"
       routerLinkActive="active"
       class="nav-link"
     >
       <mat-icon>add_circle</mat-icon>
       <span>Prendre RDV</span>
     </a>
+
+        <!-- Lien Paiement -->
+        <a
+        routerLink="/paiement"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        <mat-icon>credit_card</mat-icon>
+        <span>Paiement</span>
+      </a>
   </div>
 </nav>

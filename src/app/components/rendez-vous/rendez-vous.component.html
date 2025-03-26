@@ -1,3 +1,7 @@
+<div *ngIf="showSidebar" id="sidebar" class="section">
+  <app-sidebar></app-sidebar>
+</div>
+
 <div class="rdv-container">
   <!-- Vue Formulaire Prendre RDV -->
   <div *ngIf="showForm" class="form-view">
@@ -9,7 +13,7 @@
       <button (click)="toggleView()" class="btn-switch">
         <i class="material-icons">list</i>
         Voir mes RDV
-      </button>
+      </button>      
     </div>
 
     <div *ngIf="successMessage" class="alert success">

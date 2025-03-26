@@ -50,12 +50,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   goToPatientSpace() {
     if (this.patientId) {
-      this.router.navigate(['/espace-patient', this.patientId]);
+      this.router.navigate(['/sidebar']);
     } else {
       console.error('ID du patient introuvable.');
       this.router.navigate(['/login']);
     }
   }
+  
 
   logout() {
     this.authService.logout();

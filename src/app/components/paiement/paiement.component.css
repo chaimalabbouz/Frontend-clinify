@@ -5,10 +5,19 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 119px;
+    margin-top: 7em;
 
   }
-  
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    background: #deebed;
+    color: black;
+    padding: 20px 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: -98px;
+  }
   h2 {
     text-align: center;
   }
