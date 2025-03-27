@@ -34,7 +34,9 @@ export class RendezVousService {
         medecin: {
           id: rdv.Medecin?.id || 0,
           nomComplet: rdv.Medecin ? `${rdv.Medecin.firstName} ${rdv.Medecin.lastName}` : 'Inconnu',
-          specialite: rdv.Medecin?.specialty || 'Généraliste'
+          specialite: rdv.Medecin?.specialty || 'Généraliste',
+          numSalle: rdv.Medecin?.numSalle || '',  // Utilisation de ?. et valeur par défaut
+        nomDept: rdv.Medecin?.nomDept || '' 
         },
         date: new Date(rdv.date),
         statut: rdv.statut?.toLowerCase() || 'inconnu'

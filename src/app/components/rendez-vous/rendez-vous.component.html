@@ -107,6 +107,8 @@
               <th>Spécialité</th>
               <th>Statut</th>
               <th>Type</th>
+              <th>numSalle</th>
+              <th>nomDept</th>
             </tr>
           </thead>
           <tbody>
@@ -129,6 +131,8 @@
                 </span>
               </td>
               <td>{{ rdv.typeRendezVous || "Consultation" }}</td>
+              <td>{{ rdv.medecin?.numSalle || "-" }}</td>
+              <td>{{ rdv.medecin?.nomDept || "-" }}</td>
             </tr>
           </tbody>
         </table>
