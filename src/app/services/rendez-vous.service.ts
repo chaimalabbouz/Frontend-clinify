@@ -1,35 +1,52 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RendezVousService {
-  private apiUrl = 'http://localhost:3000/api/rendezvous';
+  private apiUrl = 'http://localhost:3000/api'; // Modifié pour utiliser une URL de base
 
   constructor(private http: HttpClient) {}
 
-  getRendezVousByPatientId(patientId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/patient/${patientId}`).pipe(
-      map((rdvs: any[]) => {
-        return rdvs.map(rdv => ({
-          ...rdv,
-          medecin: {
-            id: rdv.Medecin.id,
-            nomComplet: `${rdv.Medecin.firstName} ${rdv.Medecin.lastName}`,
-            specialite: rdv.Medecin.specialty
-          },
-          date: new Date(rdv.date),
-          statut: rdv.statut.toLowerCase()
-        }));
+  // Récupère les médecins
+  getAllMedecins(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/medecins`).pipe(
+      map(medecins => medecins.map(m => ({
+        id: m.id,
+        nomComplet: `${m.firstName} ${m.lastName}`,
+        specialite: m.specialty
+      }))),
+      catchError(error => {
+        console.error('Erreur chargement médecins:', error);
+        return of([]);
       })
     );
   }
-  
+
+  // Récupère les RDV d'un patient
+  getRendezVousByPatientId(patientId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/rendezvous/patient/${patientId}`).pipe(
+      map((rdvs: any[]) => rdvs.map(rdv => ({
+        ...rdv,
+        medecin: {
+          id: rdv.Medecin?.id || 0,
+          nomComplet: rdv.Medecin ? `${rdv.Medecin.firstName} ${rdv.Medecin.lastName}` : 'Inconnu',
+          specialite: rdv.Medecin?.specialty || 'Généraliste'
+        },
+        date: new Date(rdv.date),
+        statut: rdv.statut?.toLowerCase() || 'inconnu'
+      }))),
+      catchError(error => {
+        console.error('Erreur chargement RDV:', error);
+        return of([]);
+      })
+    );
+  }
 
   createRendezVous(rdvData: any): Observable<any> {
-    return this.http.post(this.apiUrl, rdvData);
+    return this.http.post(`${this.apiUrl}/rendezvous`, rdvData);
   }
 }

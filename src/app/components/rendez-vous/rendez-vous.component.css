@@ -5,7 +5,6 @@
   padding: 1rem;
   font-family: 'Roboto', sans-serif;
   margin-left: 17em;
-
 }
 
 /* Vue Formulaire */
@@ -15,7 +14,6 @@
   padding: 2rem;
   box-shadow: 0 2px 15px rgba(0,0,0,0.1);
   margin-top: 5em;
-
 }
 
 .form-header {
@@ -102,7 +100,6 @@
   padding: 2rem;
   box-shadow: 0 2px 15px rgba(0,0,0,0.1);
   margin-top: 6em;
-
 }
 
 .list-header {

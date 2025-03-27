@@ -7,13 +7,11 @@
   <div *ngIf="showForm" class="form-view">
     <div class="form-header">
       <h2>
-        <i class="material-icons">event_available</i>
-        Prendre un rendez-vous
+        <i class="material-icons">event_available</i> Prendre un rendez-vous
       </h2>
       <button (click)="toggleView()" class="btn-switch">
-        <i class="material-icons">list</i>
-        Voir mes RDV
-      </button>      
+        <i class="material-icons">list</i> Voir mes RDV
+      </button>
     </div>
 
     <div *ngIf="successMessage" class="alert success">
@@ -61,15 +59,16 @@
           <label>Médecin <span>*</span></label>
           <select formControlName="IdMedecin" class="form-select">
             <option value="">-- Choisir --</option>
-            <option value="1">Dr. Jean Martin (Cardiologie)</option>
-            <option value="2">Dr. Ahmed Zied (Dentiste)</option>
+            <!-- Liste dynamique -->
+            <option *ngFor="let medecin of medecinsList" [value]="medecin.id">
+              Dr. {{ medecin.nomComplet }} ({{ medecin.specialite }})
+            </option>
           </select>
         </div>
       </div>
 
       <button type="submit" [disabled]="!rdvForm.valid" class="btn-submit">
-        <i class="material-icons">save</i>
-        Confirmer
+        <i class="material-icons">save</i> Confirmer
       </button>
     </form>
   </div>
@@ -77,13 +76,9 @@
   <!-- Vue Liste des RDV -->
   <div *ngIf="!showForm" class="list-view">
     <div class="list-header">
-      <h2>
-        <i class="material-icons">calendar_today</i>
-        Mes Rendez-vous
-      </h2>
+      <h2><i class="material-icons">calendar_today</i> Mes Rendez-vous</h2>
       <button (click)="toggleView()" class="btn-switch">
-        <i class="material-icons">add</i>
-        Nouveau RDV
+        <i class="material-icons">add</i> Nouveau RDV
       </button>
     </div>
 
@@ -93,8 +88,7 @@
     </div>
 
     <div *ngIf="!isLoading && errorMessage" class="alert error">
-      <i class="material-icons">error</i>
-      {{ errorMessage }}
+      <i class="material-icons">error</i> {{ errorMessage }}
     </div>
 
     <div *ngIf="!isLoading && rendezVousList.length === 0" class="empty">
