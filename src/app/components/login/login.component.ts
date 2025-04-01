@@ -32,7 +32,7 @@ export class LoginComponent {
           this.authService.saveToken(response.token, response.role, response.userId, response.userName);
           
           // Rediriger vers le dashboard
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/patient-space']);
         },
         error: error => {
           console.error('Erreur de connexion', error);

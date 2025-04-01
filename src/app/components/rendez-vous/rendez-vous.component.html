@@ -96,7 +96,67 @@
       <p>Aucun rendez-vous programmé</p>
     </div>
 
-    <div *ngIf="!isLoading && rendezVousList.length > 0" class="rdv-list">
+    <!-- Section des RDV confirmés -->
+    <div
+      *ngIf="!isLoading && groupedRendezVous.confirmed.length > 0"
+      class="rdv-section confirmed"
+    >
+      <h3>
+        <i class="material-icons">check_circle</i> Rendez-vous confirmés ({{
+          groupedRendezVous.confirmed.length
+        }})
+      </h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>N° RDV</th>
+              <th>Date</th>
+              <th>Heure</th>
+              <th>Médecin</th>
+              <th>Spécialité</th>
+              <th>Type</th>
+              <th>Salle</th>
+              <th>Département</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rdv of groupedRendezVous.confirmed">
+              <td class="id-rdv">{{ rdv.idRDV }}</td>
+              <td class="date">{{ rdv.date | date : "dd/MM/yyyy" }}</td>
+              <td>{{ rdv.heure | slice : 0 : 5 }}</td>
+              <td class="doctor">
+                <i class="material-icons">person</i>
+                {{ rdv.medecin?.nomComplet || "Non spécifié" }}
+              </td>
+              <td>{{ rdv.medecin?.specialite || "Généraliste" }}</td>
+              <td>{{ rdv.typeRendezVous || "Consultation" }}</td>
+              <td>{{ rdv.medecin?.numSalle || "-" }}</td>
+              <td>{{ rdv.medecin?.nomDept || "-" }}</td>
+              <td>
+                <button
+                  (click)="annulerRendezVous(rdv.idRDV)"
+                  class="btn-cancel"
+                >
+                  <i class="material-icons">cancel</i> Annuler
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Section des RDV non confirmés -->
+    <div
+      *ngIf="!isLoading && groupedRendezVous.pending.length > 0"
+      class="rdv-section pending"
+    >
+      <h3>
+        <i class="material-icons">pending_actions</i> Rendez-vous non confirmés
+        ({{ groupedRendezVous.pending.length }})
+      </h3>
       <div class="table-container">
         <table>
           <thead>
@@ -107,12 +167,11 @@
               <th>Spécialité</th>
               <th>Statut</th>
               <th>Type</th>
-              <th>numSalle</th>
-              <th>nomDept</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let rdv of rendezVousList">
+            <tr *ngFor="let rdv of groupedRendezVous.pending">
               <td class="date">{{ rdv.date | date : "dd/MM/yyyy" }}</td>
               <td>{{ rdv.heure | slice : 0 : 5 }}</td>
               <td class="doctor">
@@ -126,13 +185,23 @@
                   [class.pending]="rdv.statut === 'en attente'"
                   [class.confirmed]="rdv.statut === 'validé'"
                   [class.cancelled]="rdv.statut === 'annulé'"
+                  [class.failed]="rdv.statut === 'échoué'"
                 >
                   {{ rdv.statut || "Inconnu" }}
                 </span>
               </td>
               <td>{{ rdv.typeRendezVous || "Consultation" }}</td>
-              <td>{{ rdv.medecin?.numSalle || "-" }}</td>
-              <td>{{ rdv.medecin?.nomDept || "-" }}</td>
+              <td>
+                <button
+                  (click)="annulerRendezVous(rdv.idRDV)"
+                  class="btn-cancel"
+                  [disabled]="
+                    rdv.statut === 'annulé' || rdv.statut === 'échoué'
+                  "
+                >
+                  <i class="material-icons">cancel</i> Annuler
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>

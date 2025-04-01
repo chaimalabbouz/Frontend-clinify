@@ -31,12 +31,13 @@ export class RendezVousService {
     return this.http.get<any[]>(`${this.apiUrl}/rendezvous/patient/${patientId}`).pipe(
       map((rdvs: any[]) => rdvs.map(rdv => ({
         ...rdv,
+        idRDV: rdv.idRDV, // Assurez-vous que c'est le bon champ
         medecin: {
           id: rdv.Medecin?.id || 0,
           nomComplet: rdv.Medecin ? `${rdv.Medecin.firstName} ${rdv.Medecin.lastName}` : 'Inconnu',
           specialite: rdv.Medecin?.specialty || 'Généraliste',
-          numSalle: rdv.Medecin?.numSalle || '',  // Utilisation de ?. et valeur par défaut
-        nomDept: rdv.Medecin?.nomDept || '' 
+          numSalle: rdv.Medecin?.numSalle || '',
+          nomDept: rdv.Medecin?.nomDept || ''
         },
         date: new Date(rdv.date),
         statut: rdv.statut?.toLowerCase() || 'inconnu'
@@ -50,5 +51,8 @@ export class RendezVousService {
 
   createRendezVous(rdvData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/rendezvous`, rdvData);
+  }
+  annulerRendezVous(rdvId: number): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/rendezvous/${rdvId}/annuler`, {});
   }
 }

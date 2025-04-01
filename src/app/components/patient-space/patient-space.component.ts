@@ -1,14 +1,13 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 import { PatientService } from '../../services/patient.service';
 import { AuthService } from '../../services/auth.service';
-import { ActivatedRoute } from '@angular/router';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-patient-space',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, SidebarComponent],
   templateUrl: './patient-space.component.html',
   styleUrls: ['./patient-space.component.css']
 })
@@ -17,34 +16,46 @@ export class PatientSpaceComponent implements OnInit {
 
   constructor(
     private patientService: PatientService,
-    private authService: AuthService,
-    private route: ActivatedRoute
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    let patientId = this.route.snapshot.paramMap.get('id');
+    this.loadPatientData();
+    this.hideFooter(); // Appel de la nouvelle fonction
+  }
 
-    if (!patientId) {
-      // ✅ Aucun ID dans l’URL, on prend l'ID du patient connecté
-      patientId = this.authService.getPatientId();
-    }
+  private loadPatientData(): void {
+    const patientId = this.authService.getPatientId();
+    console.log('ID patient connecté:', patientId);
 
-    console.log('ID du patient utilisé:', patientId);
-
-    const parsedId = patientId ? Number(patientId) : null;
-
-    if (parsedId && !isNaN(parsedId)) {
-      this.patientService.getPatientById(parsedId).subscribe({
+    if (patientId) {
+      this.patientService.getPatientById(Number(patientId)).subscribe({
         next: (data) => {
           this.patient = data;
-          console.log('Patient récupéré', this.patient);
+          console.log('Données patient:', data);
         },
         error: (err) => {
-          console.error('Erreur récupération patient', err);
+          console.error('Erreur chargement patient:', err);
+          this.patient = {
+            firstName: 'Utilisateur',
+            lastName: '',
+            email: ''
+          };
         }
       });
-    } else {
-      console.error('ID du patient invalide:', patientId);
     }
+  }
+
+  // Nouvelle fonction pour cacher le footer
+  private hideFooter(): void {
+    setTimeout(() => {
+      const footer = document.getElementById('footer-section');
+      if (footer) {
+        footer.style.display = 'none';
+        console.log('Footer caché avec succès');
+      } else {
+        console.warn('Footer non trouvé, vérifiez l\'ID');
+      }
+    }, 50); // Petit délai pour s'assurer que le DOM est chargé
   }
 }

@@ -1,23 +1,32 @@
+<div class="page-container">
+  <app-sidebar></app-sidebar>
 
-<div class="patient-profile">
+  <div class="main-content">
+    <!-- Espace vide pour pousser le contenu vers le bas -->
+    <div style="height: 40px"></div>
 
-  
-  <div *ngIf="patient; else loading" class="patient-info">
-    <div class="profile-item">
-      <strong>Nom :</strong> {{ patient.firstName }} {{ patient.lastName }}
+    <!-- Section Bienvenue -->
+    <div class="welcome-section" *ngIf="patient">
+      <h1>Bienvenue, {{ patient.firstName }} {{ patient.lastName }} !</h1>
+      <p>Votre espace personnel Clinify</p>
     </div>
-    <div class="profile-item">
-      <strong>Email :</strong> {{ patient.email }}
-    </div>
-    <div class="profile-item">
-      <strong>Date de naissance :</strong> {{ patient.dateOfBirth | date: 'dd/MM/yyyy' }}
+
+    <!-- Carte d'informations -->
+    <div class="patient-card" *ngIf="patient">
+      <div class="info-row">
+        <span class="label">Nom complet :</span>
+        <span>{{ patient.firstName }} {{ patient.lastName }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label">Email :</span>
+        <span>{{ patient.email }}</span>
+      </div>
+
+      <div class="info-row" *ngIf="patient.dateOfBirth">
+        <span class="label">Date de naissance :</span>
+        <span>{{ patient.dateOfBirth | date : "dd/MM/yyyy" }}</span>
+      </div>
     </div>
   </div>
-
-  <ng-template #loading>
-    <p class="loading-message">Chargement des données...</p>
-  </ng-template>
-
-  
-  
 </div>
