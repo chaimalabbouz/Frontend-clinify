@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+/*import { SidebarComponent } from '../sidebar/sidebar.component';*/
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { PatientService } from '../../services/patient.service';
 import { AuthService } from '../../services/auth.service';
