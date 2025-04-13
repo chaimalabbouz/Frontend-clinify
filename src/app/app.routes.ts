@@ -9,6 +9,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { PaiementComponent } from './components/paiement/paiement.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { PatientSpaceComponent } from './components/patient-space/patient-space.component';
+import { NotificationComponent } from './components/notification/notification.component'; // ajoute cette ligne en haut
+
 
 export const routes: Routes = [
   { path: '', component: HomeComponent }, // Route par défaut
@@ -19,16 +21,13 @@ export const routes: Routes = [
   { path: 'paiement', component: PaiementComponent },
   {path: 'sidebar', component : SidebarComponent},
    // NOUVELLE ROUTE À AJOUTER
-   { 
-    path: 'patient-space', 
-    component: PatientSpaceComponent 
-    // canActivate: [AuthGuard] // À décommenter si nécessaire
-  },
+   {path: 'patient-space', component: PatientSpaceComponent },
   
   // Version sans children - routes plates
   { path: 'dossier', component: DossierMedicalComponent },
   { path: 'rendez-vous', component: RendezVousComponent},
   { path: 'nouveau-rdv', component: RendezVousComponent},
+  { path: 'notifications/patient/:id', component: NotificationComponent },
 
 
 

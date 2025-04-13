@@ -14,6 +14,8 @@ export class DisplayContactService {
     'login',
     'nouveau-rdv',
     'dossier',
+    'patient-space',
+    'notifications',
   ];
 
   constructor(private router: Router) {}

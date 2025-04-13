@@ -1,0 +1,32 @@
+<div *ngIf="showSidebar" id="sidebar" class="sidebar">
+  <app-sidebar></app-sidebar>
+</div>
+<div class="notif-wrapper">
+
+  <button (click)="markAllAsRead()" *ngIf="unreadCount > 0" class="mark-read-btn">
+    Marquer tout comme lu
+  </button>
+
+  <table *ngIf="notifications.length > 0; else noNotif" class="notif-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Message</th>
+        <th>Type</th>
+        <th>Statut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let notif of notifications; let i = index" [class.unread]="!notif.isRead">
+        <td>{{ i + 1 }}</td>
+        <td>{{ notif.message }}</td>
+        <td>{{ notif.type }}</td>
+        <td>{{ notif.isRead ? 'Lu' : 'Non lu' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noNotif>
+    <p>Aucune notification.</p>
+  </ng-template>
+</div>
