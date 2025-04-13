@@ -17,12 +17,12 @@
   <div class="navbar-right">
     <ul class="nav-links">
             <!-- ✅ Afficher Se Connecter et S'inscrire si l'utilisateur N'EST PAS connecté -->
-            <li *ngIf="!(isLoggedIn$ | async)">
-              <a routerLink="/login">Se Connecter</a>
-            </li>
-            <li *ngIf="!(isLoggedIn$ | async)">
-              <a routerLink="/register">S'inscrire</a>
-            </li>
+      <li *ngIf="!(isLoggedIn$ | async)">
+        <a routerLink="/login">Se Connecter</a>
+      </li>
+      <li *ngIf="!(isLoggedIn$ | async)">
+        <a routerLink="/register">S'inscrire</a>
+      </li>
     </ul>
  
   </div>  
@@ -34,6 +34,29 @@
       <li *ngIf="isLoggedIn$ | async" style="margin-top: 10px;">
         <a (click)="logout()">Se Déconnecter</a>
       </li>
+      
+      <li *ngIf="isLoggedIn$ | async" class="notif-container">
+        <button class="notif-button" (click)="goToNotificationPage()" aria-label="Notifications">
+          <!-- Icône SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+               class="bi bi-bell-fill" viewBox="0 0 16 16">
+            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 
+                     5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 
+                     0-2.42-1.72-4.44-4.005-4.901"/>
+          </svg>
+      
+          <!-- Badge -->
+          <span
+            class="notif-badge"
+            [class.zero]="unreadCount === 0"
+            *ngIf="unreadCount >= 0"
+          >
+            {{ unreadCount }}
+          </span>
+        </button>
+      </li>
+      
+      
 
       <li *ngIf="isLoggedIn$ | async" class="user-initial">
         <button (click)="goToPatientSpace()" class="user-initial-btn">
