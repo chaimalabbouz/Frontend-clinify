@@ -1,4 +1,4 @@
-# Clinify Frontoffice – Client Space 
+# Clinify Frontoffice – Client Space  
 
 ![Clinify Frontoffice Logo](public/assets/images/logoNavLight.png)
 
