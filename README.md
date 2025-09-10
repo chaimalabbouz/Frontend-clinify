@@ -1,59 +1,51 @@
-# FrontOffice
+# Clinify Frontoffice – Client Space 
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
+![Clinify Frontoffice Logo](public/assets/images/logoNavLight.png)
 
-## Development server
+## Project Overview
+**Clinify Frontoffice** is the client-facing web application of the Clinify platform.  
+It allows patients to securely access their personal space, view their medical profile, book consultations, and manage appointments.  
+The app ensures a smooth, secure, and responsive user experience using **Angular, Bootstrap, JavaScript, TypeScript, and HTML**, with **JWT authentication** for secure login.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## Features 
+- Secure registration and login using JWT authentication  
+- View personal health profile  
+- Book, view, and manage medical appointments  
+- Access consultation history  
+- Receive notifications for upcoming appointments  
+- Responsive interface for desktop and tablet devices  
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Technology Stack 
+<p align="left">
+  <a href="https://angular.io/" target="_blank"> <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Angular" width="60" height="60"/> </a>
+  <a href="https://getbootstrap.com/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="Bootstrap" width="60" height="60"/> </a>
+  <a href="https://www.javascript.com/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript" width="60" height="60"/> </a>
+  <a href="https://www.typescriptlang.org/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="TypeScript" width="60" height="60"/> </a>
+  <a href="https://www.w3.org/html/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="HTML5" width="60" height="60"/> </a>
+</p>
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## Architecture 
+- Built with **Angular** for dynamic single-page application functionality  
+- Styled using **Bootstrap** for responsive design  
+- Uses **JWT authentication** for secure login sessions  
+- Connects to **Node.js backend APIs** for data exchange  
+- Designed for scalability and maintainability  
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## Setup and Installation 
 
-## Building
+### Prerequisites
+- Node.js and npm  
+- Angular CLI  
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Steps to Run the Project
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/your-username/clinify-frontoffice.git
