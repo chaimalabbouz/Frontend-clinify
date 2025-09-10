@@ -1,6 +1,6 @@
 # Clinify Frontoffice – Client Space  
 
-![Clinify Frontoffice Logo](public/assets/images/logoNavLight.png)
+<img src="public/assets/images/clinify.jpeg" alt="Clinify Logo" width="100" height="100">
 
 ## Project Overview
 **Clinify Frontoffice** is the client-facing web application of the Clinify platform.  
